@@ -14,9 +14,26 @@ PROGRESSION_LEN_INTERVAL = (5, 10)
 PROGRESSION_STEP_INTERVAL = (-10, 10)
 
 
-def greeting():
+def greeting() -> str:
     print('Welcome to the Brain Games!')
     return welcome_user()
+
+
+def is_prime(num: int) -> bool:
+    if num <= 1:
+        return False
+    elif num <= 3:
+        return True
+    elif num % 2 == 0 or num % 3 == 0:
+        return False
+
+    i = 5
+    while i * i <= num:
+        if num % i == 0 or num % (i + 2) == 0:
+            return False
+        i += 6
+
+    return True
 
 
 def generate_argument(script_name):
@@ -59,6 +76,9 @@ def generate_argument(script_name):
 
             return hidden_value, ' '.join(progression)
 
+        case 'brain_prime.py':
+            return randint(START_INT, END_INT)
+
 
 def calculate_right_answer(script_name, source):
     match script_name:
@@ -78,11 +98,14 @@ def calculate_right_answer(script_name, source):
             correct_answer, _ = source
             return str(correct_answer)
 
+        case 'brain_prime.py':
+            return 'yes' if is_prime(source) else 'no'
+
 
 def ask_question_and_get_answer(script_name, source):
     question = ''
     match script_name:
-        case 'brain_even.py':
+        case 'brain_even.py' | 'brain_prime.py':
             question = f'{source}'
 
         case 'brain_calc.py':
