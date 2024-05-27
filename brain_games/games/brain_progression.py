@@ -11,10 +11,9 @@ from brain_games.games import (
 
 
 def main():
-    script_name = os.path.basename(__file__)
     name = greeting()
-
-    print('Find the greatest common divisor of given numbers.')
+    script_name = os.path.basename(__file__)
+    print('What number is missing in the progression?')
 
     for i in range(ROUNDS_PER_GAME):
         random_value = generate_argument(script_name)

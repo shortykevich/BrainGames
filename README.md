@@ -7,3 +7,5 @@
 <a href="https://asciinema.org/a/TSqMSFHtsbkmKRd4ecTlvOodl" target="_blank"><img src="https://asciinema.org/a/TSqMSFHtsbkmKRd4ecTlvOodl.svg" /></a>
 ### added brain-gcd:
 <a href="https://asciinema.org/a/dCzv2HcSkCeUp3F7UgEoDnIdD" target="_blank"><img src="https://asciinema.org/a/dCzv2HcSkCeUp3F7UgEoDnIdD.svg" /></a>
+### added brain-progression:
+<a href="https://asciinema.org/a/qGyxx4nibM7lRnKEtpPgshck6" target="_blank"><img src="https://asciinema.org/a/qGyxx4nibM7lRnKEtpPgshck6.svg" /></a>
