@@ -22,9 +22,11 @@ def greeting() -> str:
 def is_prime(num: int) -> bool:
     if num <= 1:
         return False
-    elif num <= 3:
+
+    if num <= 3:
         return True
-    elif num % 2 == 0 or num % 3 == 0:
+
+    if num % 2 == 0 or num % 3 == 0:
         return False
 
     i = 5
@@ -76,9 +78,6 @@ def generate_argument(script_name):
 
             return hidden_value, ' '.join(progression)
 
-        case 'brain_prime.py':
-            return randint(START_INT, END_INT)
-
 
 def calculate_right_answer(script_name, source):
     match script_name:
@@ -98,14 +97,11 @@ def calculate_right_answer(script_name, source):
             correct_answer, _ = source
             return str(correct_answer)
 
-        case 'brain_prime.py':
-            return 'yes' if is_prime(source) else 'no'
-
 
 def ask_question_and_get_answer(script_name, source):
     question = ''
     match script_name:
-        case 'brain_even.py' | 'brain_prime.py':
+        case 'brain_even.py':
             question = f'{source}'
 
         case 'brain_calc.py':
