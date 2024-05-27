@@ -1,5 +1,5 @@
 import prompt
-from math import gcd
+from math import gcd, sqrt
 
 from brain_games import welcome_user
 from random import randint, choice
@@ -23,15 +23,9 @@ def is_prime(num: int) -> bool:
     if num <= 1:
         return False
 
-    if num <= 3:
-        return True
-
-    if num % 2 == 0 or num % 3 == 0:
-        return False
-
-    i = 5
-    while i * i <= num:
-        if num % i == 0 or num % (i + 2) == 0:
+    end_of_range = int(sqrt(num)) + 1
+    for i in range(2, end_of_range):
+        if num % i == 0:
             return False
         i += 6
 
@@ -78,6 +72,9 @@ def generate_argument(script_name):
 
             return hidden_value, ' '.join(progression)
 
+        case 'brain_prime.py':
+            return randint(START_INT, END_INT)
+
 
 def calculate_right_answer(script_name, source):
     match script_name:
@@ -97,11 +94,14 @@ def calculate_right_answer(script_name, source):
             correct_answer, _ = source
             return str(correct_answer)
 
+        case 'brain_prime.py':
+            return 'yes' if is_prime(source) else 'no'
+
 
 def ask_question_and_get_answer(script_name, source):
     question = ''
     match script_name:
-        case 'brain_even.py':
+        case 'brain_even.py' | 'brain_prime.py':
             question = f'{source}'
 
         case 'brain_calc.py':
