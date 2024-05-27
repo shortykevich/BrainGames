@@ -2,7 +2,8 @@
 import os
 
 from brain_games.scripts.games import (
-    ROUNDS_PER_GAME, greeting,
+    ROUNDS_PER_GAME,
+    greeting,
     generate_argument,
     calculate_right_answer,
     ask_question_and_get_answer,
@@ -11,9 +12,8 @@ from brain_games.scripts.games import (
 
 
 def main():
-    script_name = os.path.basename(__file__)
     name = greeting()
-
+    script_name = os.path.basename(__file__)
     print('Find the greatest common divisor of given numbers.')
 
     for i in range(ROUNDS_PER_GAME):

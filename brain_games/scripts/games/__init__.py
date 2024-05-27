@@ -137,5 +137,4 @@ __all__ = [
     'calculate_right_answer',
     'ask_question_and_get_answer',
     'is_wrong_answer',
-
 ]
