@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import os
 
-from brain_games.games import (
+from brain_games.scripts.games import (
     ROUNDS_PER_GAME, greeting,
     generate_argument,
     calculate_right_answer,
@@ -13,7 +13,7 @@ from brain_games.games import (
 def main():
     name = greeting()
     script_name = os.path.basename(__file__)
-    print('What is the result of the expression?')
+    print('What number is missing in the progression?')
 
     for i in range(ROUNDS_PER_GAME):
         random_value = generate_argument(script_name)

@@ -83,14 +83,15 @@ def ask_question_and_get_answer(script_name, source):
     question = ''
     match script_name:
         case 'brain_even.py':
-            question = 'yes' if source % 2 == 0 else 'no'
+            question = f'{source}'
 
         case 'brain_calc.py':
             a, b, expression = source
             question = f'{a} {expression} {b}'
 
         case 'brain_gcd.py':
-            question = f'{source}'
+            a, b = source
+            question = f'{a} {b}'
 
         case 'brain_progression.py':
             _, progression = source

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import os
 
-from brain_games.games import (
+from brain_games.scripts.games import (
     ROUNDS_PER_GAME, greeting,
     generate_argument,
     calculate_right_answer,
