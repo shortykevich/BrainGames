@@ -5,3 +5,5 @@
 <a href="https://asciinema.org/a/kRGjW3vctLggJtAuvHUswmlai" target="_blank"><img src="https://asciinema.org/a/kRGjW3vctLggJtAuvHUswmlai.svg" /></a>
 ### added brain-calc:
 <a href="https://asciinema.org/a/TSqMSFHtsbkmKRd4ecTlvOodl" target="_blank"><img src="https://asciinema.org/a/TSqMSFHtsbkmKRd4ecTlvOodl.svg" /></a>
+### added brain-gcd:
+<a href="https://asciinema.org/a/dCzv2HcSkCeUp3F7UgEoDnIdD" target="_blank"><img src="https://asciinema.org/a/dCzv2HcSkCeUp3F7UgEoDnIdD.svg" /></a>
