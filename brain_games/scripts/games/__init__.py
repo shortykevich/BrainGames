@@ -1,22 +1,44 @@
+import os
 import prompt
 from math import gcd, sqrt
 
 from brain_games import welcome_user
 from random import randint, choice
-
-
-ROUNDS_PER_GAME = 3
-
-START_INT = 1
-END_INT = 100
-
-PROGRESSION_LEN_INTERVAL = (5, 10)
-PROGRESSION_STEP_INTERVAL = (-10, 10)
+from brain_games.scripts.games.constants import (
+    ROUNDS_PER_GAME,
+    START_INT,
+    END_INT,
+    PROGRESSION_LEN_INTERVAL,
+    PROGRESSION_STEP_INTERVAL,
+)
 
 
 def greeting() -> str:
     print('Welcome to the Brain Games!')
-    return welcome_user()
+    name = welcome_user()
+    return name
+
+
+def specify_instructions(game_name: str) -> str:
+    match game_name:
+        case 'brain_calc.py':
+            print('What is the result of the expression?')
+
+        case 'brain_even.py':
+            print('Answer "yes" if the number is even, '
+                  'otherwise answer "no".')
+
+        case 'brain_gcd.py':
+            print('Find the greatest common divisor of given numbers.')
+
+        case 'brain_prime.py':
+            print('Answer "yes" if given number is prime. '
+                  'Otherwise answer "no".')
+
+        case 'brain_progression.py':
+            print('What number is missing in the progression?')
+
+    return game_name
 
 
 def is_prime(num: int) -> bool:
@@ -32,7 +54,7 @@ def is_prime(num: int) -> bool:
     return True
 
 
-def generate_argument(script_name):
+def generate_argument(script_name: str) -> int | tuple:
     match script_name:
         case 'brain_even.py':
             return randint(START_INT, END_INT)
@@ -76,7 +98,9 @@ def generate_argument(script_name):
             return randint(START_INT, END_INT)
 
 
-def calculate_right_answer(script_name, source):
+def calculate_right_answer(script_name: str,
+                           source: int | tuple
+                           ) -> int | tuple | str:
     match script_name:
         case 'brain_even.py':
             return 'yes' if source % 2 == 0 else 'no'
@@ -98,7 +122,9 @@ def calculate_right_answer(script_name, source):
             return 'yes' if is_prime(source) else 'no'
 
 
-def ask_question_and_get_answer(script_name, source):
+def ask_question_and_get_answer(script_name: str,
+                                source: int | tuple
+                                ) -> str:
     question = ''
     match script_name:
         case 'brain_even.py' | 'brain_prime.py':
@@ -120,7 +146,9 @@ def ask_question_and_get_answer(script_name, source):
     return prompt.string("Your answer: ")
 
 
-def is_wrong_answer(answer, correct_answer, name):
+def is_wrong_answer(answer: int | str,
+                    correct_answer: str,
+                    name: str) -> bool | None:
     if answer == correct_answer:
         print("Correct!")
     else:
@@ -137,4 +165,5 @@ __all__ = [
     'calculate_right_answer',
     'ask_question_and_get_answer',
     'is_wrong_answer',
+    'specify_instructions',
 ]
