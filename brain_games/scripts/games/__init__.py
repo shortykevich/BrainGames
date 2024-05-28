@@ -1,4 +1,3 @@
-import os
 import prompt
 from math import gcd, sqrt
 
@@ -19,57 +18,59 @@ def greeting() -> str:
     return name
 
 
-def specify_instructions(game_name: str) -> str:
+def specify_instructions(game_name: str) -> None:
     match game_name:
-        case 'brain_calc.py':
+        case 'brain-calc':
             print('What is the result of the expression?')
-
-        case 'brain_even.py':
+        case 'brain-even':
             print('Answer "yes" if the number is even, '
                   'otherwise answer "no".')
-
-        case 'brain_gcd.py':
+        case 'brain-gcd':
             print('Find the greatest common divisor of given numbers.')
-
-        case 'brain_prime.py':
+        case 'brain-prime':
             print('Answer "yes" if given number is prime. '
                   'Otherwise answer "no".')
-
-        case 'brain_progression.py':
+        case 'brain-progression':
             print('What number is missing in the progression?')
+    return None
 
-    return game_name
 
-
-def is_prime(num: int) -> bool:
-    if num <= 1:
-        return False
-
-    end_of_range = int(sqrt(num)) + 1
-    for i in range(2, end_of_range):
-        if num % i == 0:
+def start_game(game_name: str) -> bool:
+    specify_instructions(game_name)
+    for i in range(ROUNDS_PER_GAME):
+        random_value = generate_argument(game_name)
+        correct_answer = calculate_right_answer(game_name, random_value)
+        answer = ask_question_and_get_answer(game_name, random_value)
+        if is_wrong_answer(answer, correct_answer):
             return False
-        i += 6
-
     return True
+
+
+def finish_game(result: bool, name: str) -> None:
+    if result:
+        print(f"Congratulations, {name}!")
+    else:
+        print(f"Let's try again, {name}!")
+
+    return None
 
 
 def generate_argument(script_name: str) -> int | tuple:
     match script_name:
-        case 'brain_even.py':
+        case 'brain-even':
             return randint(START_INT, END_INT)
 
-        case 'brain_calc.py':
+        case 'brain-calc':
             rand_math_expression = choice(['+', '-', '*'])
             rand_value1 = randint(START_INT, END_INT)
             rand_value2 = randint(START_INT, END_INT)
             return rand_value1, rand_value2, rand_math_expression
 
-        case 'brain_gcd.py':
+        case 'brain-gcd':
             return (randint(START_INT, END_INT),
                     randint(START_INT, END_INT))
 
-        case 'brain_progression.py':
+        case 'brain-progression':
             start_point = randint(START_INT, END_INT)
 
             x1, x2 = PROGRESSION_LEN_INTERVAL
@@ -94,7 +95,7 @@ def generate_argument(script_name: str) -> int | tuple:
 
             return hidden_value, ' '.join(progression)
 
-        case 'brain_prime.py':
+        case 'brain-prime':
             return randint(START_INT, END_INT)
 
 
@@ -102,23 +103,23 @@ def calculate_right_answer(script_name: str,
                            source: int | tuple
                            ) -> int | tuple | str:
     match script_name:
-        case 'brain_even.py':
+        case 'brain-even':
             return 'yes' if source % 2 == 0 else 'no'
 
-        case 'brain_calc.py':
+        case 'brain-calc':
             a, b, expression = source
             return str(a + b) if expression == '+' else (
                 str(a - b) if expression == '-' else str(a * b))
 
-        case 'brain_gcd.py':
+        case 'brain-gcd':
             a, b = source
             return str(gcd(a, b))
 
-        case 'brain_progression.py':
+        case 'brain-progression':
             correct_answer, _ = source
             return str(correct_answer)
 
-        case 'brain_prime.py':
+        case 'brain-prime':
             return 'yes' if is_prime(source) else 'no'
 
 
@@ -127,18 +128,18 @@ def ask_question_and_get_answer(script_name: str,
                                 ) -> str:
     question = ''
     match script_name:
-        case 'brain_even.py' | 'brain_prime.py':
+        case 'brain-even' | 'brain-prime':
             question = f'{source}'
 
-        case 'brain_calc.py':
+        case 'brain-calc':
             a, b, expression = source
             question = f'{a} {expression} {b}'
 
-        case 'brain_gcd.py':
+        case 'brain-gcd':
             a, b = source
             question = f'{a} {b}'
 
-        case 'brain_progression.py':
+        case 'brain-progression':
             _, progression = source
             question = f'{progression}'
 
@@ -148,14 +149,28 @@ def ask_question_and_get_answer(script_name: str,
 
 def is_wrong_answer(answer: int | str,
                     correct_answer: str,
-                    name: str) -> bool | None:
+                    ) -> bool:
     if answer == correct_answer:
         print("Correct!")
     else:
         print(f"'{answer}' is wrong answer ;(."
               f" Correct answer was '{correct_answer}'.")
-        print(f"Let's try again, {name}!")
         return True
+
+    return False
+
+
+def is_prime(num: int) -> bool:
+    if num <= 1:
+        return False
+
+    end_of_range = int(sqrt(num)) + 1
+    for i in range(2, end_of_range):
+        if num % i == 0:
+            return False
+        i += 6
+
+    return True
 
 
 __all__ = [
@@ -166,4 +181,6 @@ __all__ = [
     'ask_question_and_get_answer',
     'is_wrong_answer',
     'specify_instructions',
+    'start_game',
+    'finish_game',
 ]
