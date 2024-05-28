@@ -51,7 +51,6 @@ def finish_game(result: bool, name: str) -> None:
         print(f"Congratulations, {name}!")
     else:
         print(f"Let's try again, {name}!")
-
     return None
 
 
@@ -77,7 +76,7 @@ def generate_argument(script_name: str) -> int | tuple:
             progression_length = randint(x1, x2)
 
             min_s, max_s = PROGRESSION_STEP_INTERVAL
-            step = randint(min_s, max_s)
+            step = 0
             while not step:
                 step = randint(min_s, max_s)
 
@@ -156,7 +155,6 @@ def is_wrong_answer(answer: int | str,
         print(f"'{answer}' is wrong answer ;(."
               f" Correct answer was '{correct_answer}'.")
         return True
-
     return False
 
 
@@ -169,18 +167,17 @@ def is_prime(num: int) -> bool:
         if num % i == 0:
             return False
         i += 6
-
     return True
 
 
 __all__ = [
     'ROUNDS_PER_GAME',
+    'specify_instructions',
+    'start_game',
+    'finish_game',
     'greeting',
     'generate_argument',
     'calculate_right_answer',
     'ask_question_and_get_answer',
     'is_wrong_answer',
-    'specify_instructions',
-    'start_game',
-    'finish_game',
 ]
